@@ -1,18 +1,15 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>T.B.B.S. | The Best Basketball Series</title>
 
   <!-- FAVICON OFICIAL T.B.B.S. -->
-  <link rel="icon" type="image/png" sizes="512x512"
-    href="https://lh3.googleusercontent.com/d/1GCH16kHOklgWNan_2VB6FcjmP4zUXeUt?v=2">
-  <link rel="shortcut icon" type="image/png"
-    href="https://lh3.googleusercontent.com/d/1GCH16kHOklgWNan_2VB6FcjmP4zUXeUt?v=2">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" type="image/png" href="favicon.png">
 
   <style>
     :root {
@@ -31,9 +28,7 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--negro);
@@ -86,9 +81,7 @@
       transition: 0.2s;
     }
 
-    nav a:hover {
-      color: var(--dorado);
-    }
+    nav a:hover { color: var(--dorado); }
 
     main {
       max-width: 1250px;
@@ -187,9 +180,7 @@
       height: 250px;
     }
 
-    .contenido-tarjeta {
-      padding: 20px;
-    }
+    .contenido-tarjeta { padding: 20px; }
 
     .contenido-tarjeta h3 {
       color: var(--blanco);
@@ -246,9 +237,7 @@
       font-size: 14px;
     }
 
-    tr:hover td {
-      background: #222222;
-    }
+    tr:hover td { background: #222222; }
 
     .estado {
       text-align: center;
@@ -257,9 +246,7 @@
       grid-column: 1 / -1;
     }
 
-    .error {
-      color: #ff7777;
-    }
+    .error { color: #ff7777; }
 
     footer {
       text-align: center;
@@ -277,13 +264,9 @@
     }
 
     @media (max-width: 600px) {
-      header {
-        padding: 55px 10px;
-      }
+      header { padding: 55px 10px; }
 
-      header h1 {
-        letter-spacing: 6px;
-      }
+      header h1 { letter-spacing: 6px; }
 
       header p {
         font-size: 10px;
@@ -300,48 +283,32 @@
         font-size: 10px;
       }
 
-      main {
-        padding: 28px 15px;
-      }
+      main { padding: 28px 15px; }
 
-      .presentacion {
-        padding: 35px 15px;
-      }
+      .presentacion { padding: 35px 15px; }
 
-      .presentacion h2 {
-        font-size: 23px;
-      }
+      .presentacion h2 { font-size: 23px; }
 
-      .titulo-seccion {
-        font-size: 20px;
-      }
+      .titulo-seccion { font-size: 20px; }
 
       .grilla {
         grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
         gap: 12px;
       }
 
-      .imagen-jugador {
-        height: 190px;
-      }
-
+      .imagen-jugador,
       .sin-imagen.jugador {
         height: 190px;
       }
 
-      .contenido-tarjeta {
-        padding: 14px;
-      }
+      .contenido-tarjeta { padding: 14px; }
 
-      .contenido-tarjeta h3 {
-        font-size: 17px;
-      }
+      .contenido-tarjeta h3 { font-size: 17px; }
     }
   </style>
 </head>
 
 <body>
-
   <header>
     <h1>T.B.B.S.</h1>
     <p>THE BEST BASKETBALL SERIES</p>
@@ -355,13 +322,12 @@
   </nav>
 
   <main>
-
     <section id="inicio" class="presentacion">
       <h2>BIENVENIDOS A T.B.B.S.</h2>
       <p>
         La competencia donde cada partido cuenta.
         <br>
-        Equipos, jugadores y estadísticas de la temporada.
+        Equipos, jugadores y estadísticas.
       </p>
     </section>
 
@@ -381,7 +347,6 @@
 
     <section id="estadisticas">
       <h2 class="titulo-seccion">📊 ESTADÍSTICAS</h2>
-
       <div class="tabla-contenedor">
         <table>
           <thead>
@@ -393,24 +358,19 @@
               <th>PROMEDIO</th>
             </tr>
           </thead>
-
           <tbody id="tablaEstadisticas">
             <tr>
-              <td colspan="5" class="estado">
-                Cargando estadísticas...
-              </td>
+              <td colspan="5" class="estado">Cargando estadísticas...</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
-
   </main>
 
   <footer>
     <p><strong>T.B.B.S.</strong></p>
     <p>THE BEST BASKETBALL SERIES</p>
-    <p>Temporada 2027</p>
   </footer>
 
   <script>
@@ -421,9 +381,7 @@
       reemplazo.className = "sin-imagen " + tipo;
       reemplazo.textContent = inicial;
 
-      if (!url || typeof url !== "string") {
-        return reemplazo;
-      }
+      if (!url || typeof url !== "string") return reemplazo;
 
       const imagen = document.createElement("img");
       imagen.className = clase;
@@ -467,7 +425,7 @@
       titulo.textContent = equipo.nombre || "Equipo sin nombre";
 
       const descripcion = document.createElement("p");
-      descripcion.textContent = "Temporada 2027";
+      descripcion.textContent = "Equipo participante";
 
       contenido.appendChild(etiqueta);
       contenido.appendChild(titulo);
@@ -590,39 +548,77 @@
         ? error.message
         : String(error);
 
-      document.getElementById("listaEquipos").innerHTML =
-        '<p class="estado error">Error: ' + mensaje + '</p>';
+      const listaEquipos = document.getElementById("listaEquipos");
+      const listaJugadores = document.getElementById("listaJugadores");
+      const tabla = document.getElementById("tablaEstadisticas");
 
-      document.getElementById("listaJugadores").innerHTML =
-        '<p class="estado error">Error: ' + mensaje + '</p>';
+      listaEquipos.textContent = "";
+      listaJugadores.textContent = "";
 
-      document.getElementById("tablaEstadisticas").innerHTML =
-        '<tr><td colspan="5" class="estado error">' + mensaje + '</td></tr>';
+      const errorEquipos = document.createElement("p");
+      errorEquipos.className = "estado error";
+      errorEquipos.textContent = "Error: " + mensaje;
+      listaEquipos.appendChild(errorEquipos);
+
+      const errorJugadores = document.createElement("p");
+      errorJugadores.className = "estado error";
+      errorJugadores.textContent = "Error: " + mensaje;
+      listaJugadores.appendChild(errorJugadores);
+
+      const fila = document.createElement("tr");
+      const celda = document.createElement("td");
+      celda.colSpan = 5;
+      celda.className = "estado error";
+      celda.textContent = mensaje;
+      fila.appendChild(celda);
+
+      tabla.innerHTML = "";
+      tabla.appendChild(fila);
 
       console.error("Error T.B.B.S.:", error);
     }
 
     function iniciarCarga() {
-      if (
-        typeof google === "undefined" ||
-        !google.script ||
-        !google.script.run
-      ) {
-        mostrarError({
-          message: "No se pudo conectar con Google Apps Script."
-        });
-        return;
-      }
+      const URL_APPS_SCRIPT =
+        "https://script.google.com/macros/s/AKfycbyDYZzA6IPNzdbaEgabeR5EqSsftNUre_P_jJZl-hw41iPZc5yHO3GCQnuyY3d9RjdJ/exec";
 
-      google.script.run
-        .withSuccessHandler(cargarDatos)
-        .withFailureHandler(mostrarError)
-        .obtenerDatos();
+      const script = document.createElement("script");
+
+      window.tbbsRespuesta = function(respuesta) {
+        script.remove();
+        delete window.tbbsRespuesta;
+
+        if (!respuesta || respuesta.correcto !== true) {
+          mostrarError({
+            message: respuesta && respuesta.error
+              ? respuesta.error
+              : "No se pudieron obtener los datos."
+          });
+          return;
+        }
+
+        cargarDatos(respuesta.datos);
+      };
+
+      script.onerror = function() {
+        script.remove();
+        delete window.tbbsRespuesta;
+
+        mostrarError({
+          message: "No se pudo conectar con el servidor de T.B.B.S."
+        });
+      };
+
+      script.src =
+        URL_APPS_SCRIPT +
+        "?action=datos&callback=tbbsRespuesta&_=" +
+        Date.now();
+
+      document.body.appendChild(script);
     }
 
     window.addEventListener("load", iniciarCarga);
   </script>
-
 </body>
 </html>
-
+```
