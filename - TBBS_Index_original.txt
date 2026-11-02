@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>T.B.B.S. | The Best Basketball Series</title>
+
+  <!-- FAVICON OFICIAL T.B.B.S. -->
+  <link rel="icon" type="image/png" sizes="512x512"
+    href="https://lh3.googleusercontent.com/d/1GCH16kHOklgWNan_2VB6FcjmP4zUXeUt?v=2">
+  <link rel="shortcut icon" type="image/png"
+    href="https://lh3.googleusercontent.com/d/1GCH16kHOklgWNan_2VB6FcjmP4zUXeUt?v=2">
+
+  <style>
+    :root {
+      --negro: #080808;
+      --panel: #141414;
+      --dorado: #c5a34a;
+      --dorado-claro: #e4c878;
+      --blanco: #ffffff;
+      --gris: #999999;
+      --borde: #343434;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--negro);
+      color: var(--blanco);
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      text-align: center;
+      padding: 75px 20px;
+      background: radial-gradient(ellipse at center, #292216 0%, #111111 45%, #080808 100%);
+      border-bottom: 1px solid var(--dorado);
+    }
+
+    header h1 {
+      color: var(--dorado);
+      font-size: clamp(42px, 8vw, 76px);
+      letter-spacing: 12px;
+      font-weight: 900;
+    }
+
+    header p {
+      color: #dddddd;
+      letter-spacing: 5px;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px;
+      background: rgba(10, 10, 10, 0.96);
+      border-bottom: 1px solid var(--borde);
+      backdrop-filter: blur(10px);
+    }
+
+    nav a {
+      color: #dddddd;
+      text-decoration: none;
+      padding: 11px 17px;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--dorado);
+    }
+
+    main {
+      max-width: 1250px;
+      margin: auto;
+      padding: 40px 22px;
+    }
+
+    section {
+      margin-bottom: 75px;
+      scroll-margin-top: 85px;
+    }
+
+    .presentacion {
+      text-align: center;
+      padding: 55px 20px;
+      background: linear-gradient(135deg, #1c1c1c, #101010);
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+    }
+
+    .presentacion h2 {
+      color: var(--dorado);
+      font-size: 30px;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+
+    .presentacion p {
+      color: #bbbbbb;
+      line-height: 1.8;
+    }
+
+    .titulo-seccion {
+      color: var(--dorado);
+      font-size: 25px;
+      letter-spacing: 2px;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .grilla {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+    }
+
+    .tarjeta {
+      background: linear-gradient(145deg, #1c1c1c, #101010);
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-5px);
+      border-color: var(--dorado);
+    }
+
+    .imagen-jugador {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      background: #252525;
+    }
+
+    .imagen-equipo {
+      width: 100%;
+      height: 165px;
+      object-fit: contain;
+      display: block;
+      padding: 20px;
+      background: #111111;
+    }
+
+    .sin-imagen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #34302a, #111111);
+      color: var(--dorado);
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .sin-imagen.equipo {
+      width: 100%;
+      height: 165px;
+    }
+
+    .sin-imagen.jugador {
+      width: 100%;
+      height: 250px;
+    }
+
+    .contenido-tarjeta {
+      padding: 20px;
+    }
+
+    .contenido-tarjeta h3 {
+      color: var(--blanco);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .contenido-tarjeta p {
+      color: var(--gris);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      color: var(--dorado);
+      border: 1px solid #705b2b;
+      padding: 5px 9px;
+      border-radius: 4px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .tabla-contenedor {
+      overflow-x: auto;
+      background: var(--panel);
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 550px;
+    }
+
+    th, td {
+      padding: 17px;
+      text-align: left;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    th {
+      color: var(--dorado);
+      font-size: 12px;
+      letter-spacing: 1px;
+      background: #202020;
+    }
+
+    td {
+      color: #dddddd;
+      font-size: 14px;
+    }
+
+    tr:hover td {
+      background: #222222;
+    }
+
+    .estado {
+      text-align: center;
+      color: var(--gris);
+      padding: 25px;
+      grid-column: 1 / -1;
+    }
+
+    .error {
+      color: #ff7777;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 15px;
+      background: #111111;
+      border-top: 1px solid var(--dorado);
+      color: var(--gris);
+      line-height: 2;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: var(--dorado);
+      letter-spacing: 2px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 55px 10px;
+      }
+
+      header h1 {
+        letter-spacing: 6px;
+      }
+
+      header p {
+        font-size: 10px;
+        letter-spacing: 3px;
+      }
+
+      nav {
+        gap: 2px;
+        padding: 10px 5px;
+      }
+
+      nav a {
+        padding: 10px 8px;
+        font-size: 10px;
+      }
+
+      main {
+        padding: 28px 15px;
+      }
+
+      .presentacion {
+        padding: 35px 15px;
+      }
+
+      .presentacion h2 {
+        font-size: 23px;
+      }
+
+      .titulo-seccion {
+        font-size: 20px;
+      }
+
+      .grilla {
+        grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+        gap: 12px;
+      }
+
+      .imagen-jugador {
+        height: 190px;
+      }
+
+      .sin-imagen.jugador {
+        height: 190px;
+      }
+
+      .contenido-tarjeta {
+        padding: 14px;
+      }
+
+      .contenido-tarjeta h3 {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>T.B.B.S.</h1>
+    <p>THE BEST BASKETBALL SERIES</p>
+  </header>
+
+  <nav>
+    <a href="#inicio">INICIO</a>
+    <a href="#equipos">EQUIPOS</a>
+    <a href="#jugadores">JUGADORES</a>
+    <a href="#estadisticas">ESTADÍSTICAS</a>
+  </nav>
+
+  <main>
+
+    <section id="inicio" class="presentacion">
+      <h2>BIENVENIDOS A T.B.B.S.</h2>
+      <p>
+        La competencia donde cada partido cuenta.
+        <br>
+        Equipos, jugadores y estadísticas de la temporada.
+      </p>
+    </section>
+
+    <section id="equipos">
+      <h2 class="titulo-seccion">🏆 EQUIPOS PARTICIPANTES</h2>
+      <div id="listaEquipos" class="grilla">
+        <p class="estado">Cargando equipos...</p>
+      </div>
+    </section>
+
+    <section id="jugadores">
+      <h2 class="titulo-seccion">⭐ JUGADORES</h2>
+      <div id="listaJugadores" class="grilla">
+        <p class="estado">Cargando jugadores...</p>
+      </div>
+    </section>
+
+    <section id="estadisticas">
+      <h2 class="titulo-seccion">📊 ESTADÍSTICAS</h2>
+
+      <div class="tabla-contenedor">
+        <table>
+          <thead>
+            <tr>
+              <th>JUGADOR</th>
+              <th>EQUIPO</th>
+              <th>PUNTOS</th>
+              <th>PARTIDOS</th>
+              <th>PROMEDIO</th>
+            </tr>
+          </thead>
+
+          <tbody id="tablaEstadisticas">
+            <tr>
+              <td colspan="5" class="estado">
+                Cargando estadísticas...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><strong>T.B.B.S.</strong></p>
+    <p>THE BEST BASKETBALL SERIES</p>
+    <p>Temporada 2027</p>
+  </footer>
+
+  <script>
+    function crearImagen(url, clase, nombre, inicial) {
+      const tipo = clase === "imagen-jugador" ? "jugador" : "equipo";
+
+      const reemplazo = document.createElement("div");
+      reemplazo.className = "sin-imagen " + tipo;
+      reemplazo.textContent = inicial;
+
+      if (!url || typeof url !== "string") {
+        return reemplazo;
+      }
+
+      const imagen = document.createElement("img");
+      imagen.className = clase;
+      imagen.alt = nombre || "Imagen";
+      imagen.loading = "eager";
+      imagen.decoding = "async";
+
+      imagen.onerror = function() {
+        console.error("No se pudo cargar la imagen:", nombre, url);
+        imagen.replaceWith(reemplazo);
+      };
+
+      imagen.onload = function() {
+        console.log("Imagen cargada correctamente:", nombre);
+      };
+
+      imagen.src = url.trim();
+      return imagen;
+    }
+
+    function crearTarjetaEquipo(equipo, indice) {
+      const tarjeta = document.createElement("article");
+      tarjeta.className = "tarjeta";
+
+      const inicial = equipo.nombre
+        ? equipo.nombre.trim().charAt(0).toUpperCase()
+        : "E";
+
+      tarjeta.appendChild(
+        crearImagen(equipo.logo, "imagen-equipo", equipo.nombre, inicial)
+      );
+
+      const contenido = document.createElement("div");
+      contenido.className = "contenido-tarjeta";
+
+      const etiqueta = document.createElement("span");
+      etiqueta.className = "etiqueta";
+      etiqueta.textContent = "EQUIPO " + String(indice + 1).padStart(2, "0");
+
+      const titulo = document.createElement("h3");
+      titulo.textContent = equipo.nombre || "Equipo sin nombre";
+
+      const descripcion = document.createElement("p");
+      descripcion.textContent = "Temporada 2027";
+
+      contenido.appendChild(etiqueta);
+      contenido.appendChild(titulo);
+      contenido.appendChild(descripcion);
+      tarjeta.appendChild(contenido);
+
+      return tarjeta;
+    }
+
+    function crearTarjetaJugador(jugador) {
+      const tarjeta = document.createElement("article");
+      tarjeta.className = "tarjeta";
+
+      const inicial = jugador.nombre
+        ? jugador.nombre.trim().charAt(0).toUpperCase()
+        : "J";
+
+      tarjeta.appendChild(
+        crearImagen(jugador.foto, "imagen-jugador", jugador.nombre, inicial)
+      );
+
+      const contenido = document.createElement("div");
+      contenido.className = "contenido-tarjeta";
+
+      const etiqueta = document.createElement("span");
+      etiqueta.className = "etiqueta";
+      etiqueta.textContent = "JUGADOR";
+
+      const titulo = document.createElement("h3");
+      titulo.textContent = jugador.nombre || "Jugador sin nombre";
+
+      const equipo = document.createElement("p");
+      equipo.textContent = "Equipo: " + (jugador.equipo || "-");
+
+      const puntos = document.createElement("p");
+      puntos.textContent = "Puntos: " + (jugador.puntos || 0);
+
+      const partidos = document.createElement("p");
+      partidos.textContent = "Partidos: " + (jugador.partidos || 0);
+
+      const promedio = document.createElement("p");
+      promedio.textContent =
+        "Promedio: " + (Number(jugador.promedio) || 0).toFixed(1);
+
+      contenido.appendChild(etiqueta);
+      contenido.appendChild(titulo);
+      contenido.appendChild(equipo);
+      contenido.appendChild(puntos);
+      contenido.appendChild(partidos);
+      contenido.appendChild(promedio);
+
+      tarjeta.appendChild(contenido);
+      return tarjeta;
+    }
+
+    function cargarDatos(datos) {
+      if (
+        !datos ||
+        !Array.isArray(datos.equipos) ||
+        !Array.isArray(datos.jugadores)
+      ) {
+        mostrarError({
+          message: "Los datos recibidos no tienen el formato esperado."
+        });
+        return;
+      }
+
+      const listaEquipos = document.getElementById("listaEquipos");
+      const listaJugadores = document.getElementById("listaJugadores");
+      const tabla = document.getElementById("tablaEstadisticas");
+
+      listaEquipos.innerHTML = "";
+      listaJugadores.innerHTML = "";
+      tabla.innerHTML = "";
+
+      if (datos.equipos.length === 0) {
+        listaEquipos.innerHTML =
+          '<p class="estado">No hay equipos cargados.</p>';
+      } else {
+        datos.equipos.forEach(function(equipo, indice) {
+          listaEquipos.appendChild(crearTarjetaEquipo(equipo, indice));
+        });
+      }
+
+      if (datos.jugadores.length === 0) {
+        listaJugadores.innerHTML =
+          '<p class="estado">No hay jugadores cargados.</p>';
+
+        tabla.innerHTML =
+          '<tr><td colspan="5" class="estado">Todavía no hay estadísticas.</td></tr>';
+        return;
+      }
+
+      datos.jugadores.forEach(function(jugador) {
+        listaJugadores.appendChild(crearTarjetaJugador(jugador));
+
+        const fila = document.createElement("tr");
+        const valores = [
+          jugador.nombre || "-",
+          jugador.equipo || "-",
+          Number(jugador.puntos) || 0,
+          Number(jugador.partidos) || 0,
+          (Number(jugador.promedio) || 0).toFixed(1)
+        ];
+
+        valores.forEach(function(valor) {
+          const celda = document.createElement("td");
+          celda.textContent = valor;
+          fila.appendChild(celda);
+        });
+
+        tabla.appendChild(fila);
+      });
+
+      console.log("Datos cargados:", datos);
+    }
+
+    function mostrarError(error) {
+      const mensaje = error && error.message
+        ? error.message
+        : String(error);
+
+      document.getElementById("listaEquipos").innerHTML =
+        '<p class="estado error">Error: ' + mensaje + '</p>';
+
+      document.getElementById("listaJugadores").innerHTML =
+        '<p class="estado error">Error: ' + mensaje + '</p>';
+
+      document.getElementById("tablaEstadisticas").innerHTML =
+        '<tr><td colspan="5" class="estado error">' + mensaje + '</td></tr>';
+
+      console.error("Error T.B.B.S.:", error);
+    }
+
+    function iniciarCarga() {
+      if (
+        typeof google === "undefined" ||
+        !google.script ||
+        !google.script.run
+      ) {
+        mostrarError({
+          message: "No se pudo conectar con Google Apps Script."
+        });
+        return;
+      }
+
+      google.script.run
+        .withSuccessHandler(cargarDatos)
+        .withFailureHandler(mostrarError)
+        .obtenerDatos();
+    }
+
+    window.addEventListener("load", iniciarCarga);
+  </script>
+
+</body>
+</html>
+
